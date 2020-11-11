@@ -1,0 +1,49 @@
+﻿<!--Урок 2-->
+
+@if (!IsTable)
+{
+    <div class="¨row text-center alert alert-info">
+        <div class="col">
+            <p>@Game.Name</p>
+            <p>@Game.Genre</p>
+            <p>@Game.ReleaseDate.ToString("dd.MM.yyyy")</p>
+
+            @if (DisplayButton)
+            {
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+else
+{
+    <tr>
+        <td>@Game.Name</td>
+        <td>@Game.Genre</td>
+        <td>@Game.ReleaseDate.ToString("dd.MM.yyyy")</td>
+        <td>
+
+            @if (DisplayButton)
+            {
+                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+            }
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter] public Game Game { get; set; }
+    [Parameter] public bool IsTable { get; set; }
+
+    [Parameter] public bool DisplayButton { get; set; } = false;
+
+    void Delete()
+    {
+        // Delete logic
+    }
+}

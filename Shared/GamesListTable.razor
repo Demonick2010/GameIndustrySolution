@@ -5,6 +5,8 @@
                 <th>Name</th>
                 <th>Genre</th>
                 <th>Release Date</th>
+
+                <th><input type="checkbox" @onchange="@(() => displayButton = !displayButton)" /></th>
             </tr>
         </thead>
         <tbody>
@@ -18,13 +20,14 @@
             }
             else
             {
-                @foreach (var item in games)
+                @foreach (var item in games.OrderBy(x => x.ReleaseDate))
                 {
-                    <tr>
+                    @*<tr>
                         <td>@item.Name</td>
                         <td>@item.Genre</td>
                         <td>@item.ReleaseDate.ToString("dd.MM.yyyy")</td>
-                    </tr>
+                    </tr>*@
+                    <IndividualGame Game="item" IsTable="true" DisplayButton="displayButton" />
                 }
             }
         </tbody>
@@ -32,32 +35,8 @@
 </div>
 
 @code {
-    private List<Game> games { get; set; }
+    /*Урок 2*/
+    [Parameter] public List<Game> games { get; set; }
 
-    protected async override Task OnInitializedAsync()
-    {
-        await Task.Delay(3000);
-
-        games = new List<Game>()
-        {
-            new Game()
-            {
-                Name = "Farming Simulator 2019",
-                Genre = "Simulator",
-                ReleaseDate = new DateTime(2019, 11, 19)
-            },
-            new Game()
-            {
-                Name = "The Witcher 3",
-                Genre = "Action/RPG",
-                ReleaseDate = new DateTime(2015, 05, 18)
-            },
-            new Game()
-            {
-                Name = "Destroy All Humans!",
-                Genre = "Action-Adventure",
-                ReleaseDate = new DateTime(2020, 07, 28)
-            }
-        };
-    }
+    bool displayButton = false;
 }

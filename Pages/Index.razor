@@ -12,4 +12,39 @@
     </div>
 </div>
 
-<GamesListTable />
+<!--Урок 2-->
+<GamesListTable games="games"/>
+
+<IndividualGame Game="games[0]" IsTable="false" DisplayButton="true" />
+
+<!--Урок 2-->
+@code {
+    private List<Game> games;
+
+    protected async override Task OnInitializedAsync()
+    {
+        //await Task.Delay(3000);
+
+        games = new List<Game>()
+        {
+            new Game()
+            {
+                Name = "Farming Simulator 2019",
+                Genre = "Simulator",
+                ReleaseDate = new DateTime(2018, 11, 19)
+            },
+            new Game()
+            {
+                Name = "The Witcher 3",
+                Genre = "Action/RPG",
+                ReleaseDate = new DateTime(2015, 05, 18)
+            },
+            new Game()
+            {
+                Name = "Destroy All Humans!",
+                Genre = "Action-Adventure",
+                ReleaseDate = new DateTime(2020, 07, 28)
+            }
+        };
+    }
+}
