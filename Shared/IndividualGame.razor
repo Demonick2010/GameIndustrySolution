@@ -31,6 +31,11 @@ else
             @if (DisplayButton)
             {
                 <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                if (message != null)
+                {
+                    <span class="text-danger pl-3">@message</span>
+                    message = null;
+                }
             }
         </td>
     </tr>
@@ -42,8 +47,11 @@ else
 
     [Parameter] public bool DisplayButton { get; set; } = false;
 
+    string message;
+
     void Delete()
     {
         // Delete logic
+        message = $"Game {Game.Name} deleted!";
     }
 }
