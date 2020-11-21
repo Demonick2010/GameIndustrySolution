@@ -6,7 +6,8 @@
                 <th>Genre</th>
                 <th>Release Date</th>
 
-                <th><input type="checkbox" @onchange="@(() => displayButton = !displayButton)" /></th>
+                @*Урок 3 привязка данных*@
+                <th><input type="checkbox" @bind="displayButton" /></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +28,7 @@
                         <td>@item.Genre</td>
                         <td>@item.ReleaseDate.ToString("dd.MM.yyyy")</td>
                     </tr>*@
-                    <IndividualGame Game="item" IsTable="true" DisplayButton="displayButton" />
+                    <IndividualGame Game="item" IsTable="true" DisplayButton="displayButton" DeleteGame="DeleteTheGame" />
                 }
             }
         </tbody>
@@ -39,4 +40,10 @@
     [Parameter] public List<Game> games { get; set; }
 
     bool displayButton = false;
+
+    /*Урок 3*/
+    void DeleteTheGame(Game game)
+    {
+        games.Remove(game);
+    }
 }

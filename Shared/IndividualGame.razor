@@ -12,7 +12,7 @@
             {
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                        <button class="btn btn-danger" @onclick="SwitchGame">Delete</button>
                     </div>
                 </div>
             }
@@ -30,12 +30,7 @@ else
 
             @if (DisplayButton)
             {
-                <button class="btn btn-danger" @onclick="Delete">Delete</button>
-                if (message != null)
-                {
-                    <span class="text-danger pl-3">@message</span>
-                    message = null;
-                }
+                <button class="btn btn-danger" @onclick="(() => DeleteGame.InvokeAsync(Game))">Delete</button>
             }
         </td>
     </tr>
@@ -47,11 +42,15 @@ else
 
     [Parameter] public bool DisplayButton { get; set; } = false;
 
-    string message;
+    // Урок 3, создаём свойство для EventCallback
+    [Parameter] public EventCallback<Game> DeleteGame { get; set; }
+    [Parameter] public EventCallback SwitchGame { get; set; }
 
-    void Delete()
-    {
-        // Delete logic
-        message = $"Game {Game.Name} deleted!";
-    }
+    //string message;
+
+    //void Delete()
+    //{
+    //    // Delete logic
+    //    message = $"Game {Game.Name} deleted!";
+    //}
 }
