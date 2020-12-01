@@ -13,19 +13,29 @@
 </div>
 
 <!--Урок 2-->
-<GamesListTable games="games"/>
+<!--Урок 4-->
+<GamesListTable games="games" />
+    @*<ChildContent>
+        <tr><span style="text-align: center; color: red; font-weight: bolder">Elements loading...</span></tr>
+    </ChildContent>*@
+    @*<EmptyList>
+        <tr><span style="text-align: center; color: blue; font-weight: bolder">No items found...</span></tr>
+    </EmptyList>*@
+@*</GamesListTable>*@
 
-<IndividualGame Game="oneGameToShow" IsTable="false" DisplayButton="true" SwitchGame="ShowNewGame" />
+@*<IndividualGame Game="oneGameToShow" IsTable="false" DisplayButton="true" SwitchGame="ShowNewGame" />*@
 
 <!--Урок 2-->
 @code {
-    private List<Game> games;
+    private List<Game> games /*= new List<Game>()*/;
     Random rnd;
 
     Game oneGameToShow;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
+        await Task.Delay(2000);
+
         games = new List<Game>()
         {
             new Game()

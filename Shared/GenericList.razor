@@ -1,0 +1,45 @@
+﻿@typeparam TItem
+
+@if (ListOfItems == null)
+{
+    /*Урок 4*/
+
+    @if (NullList != null)
+    {
+        @NullList
+    }
+    else
+    {
+        <img src="https://cdn.dribbble.com/users/2346349/screenshots/9246147/loading.gif" height="200" />
+    }
+
+}
+else if (ListOfItems.Count == 0)
+{
+    /*Урок 4*/
+    @if (EmptyList != null)
+    {
+        @EmptyList
+    }
+    else
+    {
+        <img src="https://cdn.dribbble.com/users/2370289/screenshots/6150406/no_items_found.jpg" height="200" />
+    }
+}
+else
+{
+    @foreach (var item in ListOfItems)
+    {
+        @ItemTemplate(item)
+    }
+}
+
+@code {
+    /*Урок 4*/
+    [Parameter] public RenderFragment NullList { get; set; }
+    [Parameter] public RenderFragment EmptyList { get; set; }
+
+    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+
+    [Parameter] public List<TItem> ListOfItems { get; set; }
+}

@@ -11,26 +11,11 @@
             </tr>
         </thead>
         <tbody>
-            @if (games == null)
-            {
-                <tr>LOADING DATA...</tr>
-            }
-            else if (games.Count == 0)
-            {
-                <tr>NO ITEMS IN ARRAY...</tr>
-            }
-            else
-            {
-                @foreach (var item in games.OrderBy(x => x.ReleaseDate))
-                {
-                    @*<tr>
-                        <td>@item.Name</td>
-                        <td>@item.Genre</td>
-                        <td>@item.ReleaseDate.ToString("dd.MM.yyyy")</td>
-                    </tr>*@
-                    <IndividualGame Game="item" IsTable="true" DisplayButton="displayButton" DeleteGame="DeleteTheGame" />
-                }
-            }
+            <GenericList ListOfItems="games">
+                <ItemTemplate Context="game">
+                    <IndividualGame Game="game" IsTable="true" DisplayButton="displayButton" DeleteGame="DeleteTheGame" />
+                </ItemTemplate>
+            </GenericList>
         </tbody>
     </table>
 </div>
@@ -38,6 +23,10 @@
 @code {
     /*Урок 2*/
     [Parameter] public List<Game> games { get; set; }
+
+    /*Урок 4*/
+    //[Parameter] public RenderFragment ChildContent { get; set; }
+    //[Parameter] public RenderFragment EmptyList { get; set; }
 
     bool displayButton = false;
 
