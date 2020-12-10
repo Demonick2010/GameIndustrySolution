@@ -35,4 +35,35 @@
     {
         games.Remove(game);
     }
+
+    /*Урок 5*/
+    protected override void OnInitialized()
+    {
+        // Этот метод отвечает за инициализацию значений в самом начале жизненного цикла компонента, но после SetParametersAsync(ParameterView parameters).
+        // Он выполняется вторым
+
+        Console.WriteLine($"1. OnInitialized(). Games Count {games?.Count}.");
+    }
+
+    protected override void OnParametersSet()
+    {
+        // Этот метод вызывается после OnInitialized() или каждый раз после изменения значений параметров.
+        // Он выполняется третьим
+
+        Console.WriteLine($"2. Method OnParametersSet() is done. Games Count {games?.Count}.");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Этот метод вызывается после Финальной отрисовки страницы.
+        // Он выполняется четвёртым
+
+        Console.WriteLine($"3. Method OnAfterRender() is done. First render? {firstRender}\n");
+    }
+
+    protected override bool ShouldRender()
+    {
+        // Этот метод отключает возможность повторной отрисовки компонента
+        return true;
+    }
 }

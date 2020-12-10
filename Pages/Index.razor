@@ -1,5 +1,8 @@
 ﻿@page "/"
 
+@*Урок 5*@
+@inject IRepository repository
+
 <div class="row">
     <div class="col text-center">
         <h1>Welcome to our Game Industry Page</h1>
@@ -23,7 +26,14 @@
     </EmptyList>*@
 @*</GamesListTable>*@
 
-@*<IndividualGame Game="oneGameToShow" IsTable="false" DisplayButton="true" SwitchGame="ShowNewGame" />*@
+<IndividualGame Game="oneGameToShow" IsTable="false" DisplayButton="true" SwitchGame="ShowNewGame" />
+
+@*Урок 5*@
+<div class="row">
+    <div class="col text-center">
+        <button @onclick="AddNewGame" class="btn btn-success">Add New Game</button>
+    </div>
+</div>
 
 <!--Урок 2-->
 @code {
@@ -34,29 +44,30 @@
 
     protected async override Task OnInitializedAsync()
     {
-        await Task.Delay(2000);
+        //await Task.Delay(2000);
 
-        games = new List<Game>()
-        {
-            new Game()
-            {
-                Name = "Farming Simulator 2019",
-                Genre = "Simulator",
-                ReleaseDate = new DateTime(2018, 11, 19)
-            },
-            new Game()
-            {
-                Name = "The Witcher 3",
-                Genre = "Action/RPG",
-                ReleaseDate = new DateTime(2015, 05, 18)
-            },
-            new Game()
-            {
-                Name = "Destroy All Humans!",
-                Genre = "Action-Adventure",
-                ReleaseDate = new DateTime(2020, 07, 28)
-            }
-        };
+        games = repository.GetAllGames();
+        //new List<Game>()
+        //{
+        //    new Game()
+        //    {
+        //        Name = "Farming Simulator 2019",
+        //        Genre = "Simulator",
+        //        ReleaseDate = new DateTime(2018, 11, 19)
+        //    },
+        //    new Game()
+        //    {
+        //        Name = "The Witcher 3",
+        //        Genre = "Action/RPG",
+        //        ReleaseDate = new DateTime(2015, 05, 18)
+        //    },
+        //    new Game()
+        //    {
+        //        Name = "Destroy All Humans!",
+        //        Genre = "Action-Adventure",
+        //        ReleaseDate = new DateTime(2020, 07, 28)
+        //    }
+        //};
 
         rnd = new Random(DateTime.Now.Millisecond);
         oneGameToShow = games[rnd.Next(0, games.Count)];
@@ -83,5 +94,11 @@
             return new Game() { Name = "No more items!", ReleaseDate = DateTime.Now };
 
         return tempGame;
+    }
+
+    // Урок 5
+    void AddNewGame()
+    {
+        games.Add(new Game() {Name = "Game for test", Genre = "Test", ReleaseDate = DateTime.Today});
     }
 }

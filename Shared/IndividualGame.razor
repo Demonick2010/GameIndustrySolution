@@ -1,6 +1,6 @@
 ﻿<!--Урок 2-->
 
-@if (!IsTable)
+@if (!IsTable && Game != null)
 {
     <div class="¨row text-center alert alert-info">
         <div class="col">
@@ -12,7 +12,7 @@
             {
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-danger" @onclick="SwitchGame">Delete</button>
+                        <button class="btn btn-primary" @onclick="SwitchGame">Switch the game</button>
                     </div>
                 </div>
             }
@@ -22,18 +22,21 @@
 }
 else
 {
-    <tr>
-        <td>@Game.Name</td>
-        <td>@Game.Genre</td>
-        <td>@Game.ReleaseDate.ToString("dd.MM.yyyy")</td>
-        <td>
+    if (Game != null)
+    {
+        <tr>
+            <td>@Game.Name</td>
+            <td>@Game.Genre</td>
+            <td>@Game.ReleaseDate.ToString("dd.MM.yyyy")</td>
+            <td>
 
-            @if (DisplayButton)
-            {
-                <button class="btn btn-danger" @onclick="(() => DeleteGame.InvokeAsync(Game))">Delete</button>
-            }
-        </td>
-    </tr>
+                @if (DisplayButton)
+                {
+                    <button class="btn btn-danger" @onclick="(() => DeleteGame.InvokeAsync(Game))">Delete</button>
+                }
+            </td>
+        </tr>
+    }
 }
 
 @code {
