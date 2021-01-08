@@ -1,9 +1,5 @@
 ﻿@page "/Counter"
 
-@*Урок 5*@
-@inject SingletonService singleton
-@inject TransientService trensient
-
 @*Урок 3 привязка данных*@
 <div class="row">
     <div class="col alert alert-secondary text-center">
@@ -25,25 +21,11 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-6 text-center">
+<div class="row mt-3">
+    <div class="col-6 text-center alert alert-primary">
         Singleton count: @singleton.Value
     </div>
-    <div class="col-6 text-center">
+    <div class="col-6 text-center alert alert-danger">
         Transient count: @trensient.Value
     </div>
 </div>
-
-@code {
-
-    int counter = 0;
-
-    void ClickHandler()
-    {
-        counter++;
-
-        // Урок 5
-        singleton.Value = counter;
-        trensient.Value = counter;
-    }
-}

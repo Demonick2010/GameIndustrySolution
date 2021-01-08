@@ -16,9 +16,9 @@ namespace GameIndustry.Repository
             {
                 new Game()
                 {
-                Name = "Farming Simulator 2019",
-                Genre = "Simulator",
-                ReleaseDate = new DateTime(2018, 11, 19)
+                    Name = "Farming Simulator 2019",
+                    Genre = "Simulator",
+                    ReleaseDate = new DateTime(2018, 11, 19)
                 },
 
                 new Game()

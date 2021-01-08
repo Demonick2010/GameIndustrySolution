@@ -40,9 +40,12 @@
     private List<Game> games /*= new List<Game>()*/;
     Random rnd;
 
+    // Урок 6
+    //GamesListTable gameList;
+
     Game oneGameToShow;
 
-    protected async override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         //await Task.Delay(2000);
 
@@ -99,6 +102,7 @@
     // Урок 5
     void AddNewGame()
     {
+        //gameList.DoSomeThing();
         games.Add(new Game() {Name = "Game for test", Genre = "Test", ReleaseDate = DateTime.Today});
     }
 }

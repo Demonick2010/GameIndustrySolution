@@ -16,6 +16,10 @@
                     <IndividualGame Game="game" IsTable="true" DisplayButton="displayButton" DeleteGame="DeleteTheGame" />
                 </ItemTemplate>
             </GenericList>
+
+            <Confirmation @ref="confirmation" onCancel="onCancel" onConfirm="onConfirm">
+                <div class="text-danger">Do you wish to delete @gameToBeDeleted.Name?</div>
+            </Confirmation>
         </tbody>
     </table>
 </div>
@@ -33,7 +37,9 @@
     /*Урок 3*/
     void DeleteTheGame(Game game)
     {
-        games.Remove(game);
+        gameToBeDeleted = game;
+        confirmation.Show();
+        //games.Remove(game);
     }
 
     /*Урок 5*/
@@ -65,5 +71,28 @@
     {
         // Этот метод отключает возможность повторной отрисовки компонента
         return true;
+    }
+
+    // Урок 6
+    //public void DoSomeThing()
+    //{
+
+    //}
+
+    // Урок 6
+    Confirmation confirmation;
+    Game gameToBeDeleted;
+
+    void onConfirm()
+    {
+        games.Remove(gameToBeDeleted);
+        confirmation.Hide();
+        gameToBeDeleted = null;
+    }
+
+    void onCancel()
+    {
+        confirmation.Hide();
+        gameToBeDeleted = null;
     }
 }
