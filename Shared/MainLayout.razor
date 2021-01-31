@@ -14,10 +14,41 @@
     </div>
 
     <div class="content px-4">
-        @Body
-
+        @*Урок 7*@
+        @*<CascadingValue Value="@Color" Name="Color">*@
+        @*<CascadingValue Value="@Size" Name="Size">*@
+        <CascadingValue Value="appStyles">
+            @Body
+        </CascadingValue>
+        @*</CascadingValue>*@
+        @*</CascadingValue>*@
         @*Урок 6*@
         @*<span style="color: red">Hello from Layout body bottom content</span>
-        <GameIndustry.Pages.Counter />*@
+            <GameIndustry.Pages.Counter />*@
     </div>
 </div>
+
+@*Урок 7*@
+@code {
+    //string Color { get; set; } = "Blue";
+    //string Size { get; set; } = "35px";
+    AppStyles appStyles = new AppStyles();
+    public class AppStyles
+    {
+        public string Color { get; set; } = "Blue";
+        public string Size { get; set; } = "35px";
+        public List<string> WitcherWords { get; set; } = new List<string>()
+        {
+            new string("Видишь ли, эльфская красота - она как молодое вино из Боклера. А я как-то больше по водке."),
+            new string("Ты чудесно пахнешь на этих похоронах!"),
+            new string("Хочешь меня нахер послать? Милости просим, с*ка, давай.. Я тебя тада тоже нахер пошлю.. ну и чоо? Обнимемся, вместе пойдем, да?")
+        };
+
+        public List<TableListModel> TableStyle { get; set; } = new List<TableListModel>()
+        {
+            new TableListModel() { Text = "Table Dark", Value = "table-dark"},
+            new TableListModel() { Text = "Table Striped", Value = "table-striped"},
+            new TableListModel() { Text = "Table Bordered", Value = "table-bordered"}
+        };
+    }
+} 

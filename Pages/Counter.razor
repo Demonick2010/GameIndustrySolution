@@ -3,7 +3,9 @@
 @*Урок 3 привязка данных*@
 <div class="row">
     <div class="col alert alert-secondary text-center">
-        <h1>COUNTER</h1>
+        @*Урок 7*@
+        @*<h1 style="color: @Color">COUNTER</h1>*@
+        <h1 style="color: @Styles.Color">COUNTER</h1>
     </div>
 </div>
 <div class="row">
@@ -11,7 +13,9 @@
         <button class="btn btn-success p-3" @onclick="ClickHandler">!Click Me!</button>
     </div>
     <div class="col-6 text-right">
-        <div style="font-size: 50px">@counter</div>
+        @*Урок 7*@
+        @*<div style="font-size: @Size; color: @Color">@counter</div>*@
+        <div style="font-size: @Styles.Size; color: @Styles.Color">@counter</div>
     </div>
 </div>
 

@@ -1,5 +1,21 @@
-﻿<div class="table-responsive">
-    <table class="table table-striped">
+﻿@*Урок 7*@
+@using static GameIndustry.Shared.MainLayout
+
+@*Урок 7*@
+<div class="row mb-3">
+    <div class="col">
+        <select class="btn btn-toolbar border dropdown-toggle" @onchange="ChangeTableStyle">
+            <option selected value="">Choose Table Style</option>
+            @foreach (var item in AppStyles.TableStyle)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table @currentTableStyle">
         <thead class="thead-light">
             <tr>
                 <th>Name</th>
@@ -94,5 +110,14 @@
     {
         confirmation.Hide();
         gameToBeDeleted = null;
+    }
+
+    @*Урок 7*@
+    [CascadingParameter] public AppStyles AppStyles { get; set; }
+    string currentTableStyle = "table-striped";
+
+    void ChangeTableStyle(ChangeEventArgs currentItem)
+    {
+        currentTableStyle = currentItem.Value.ToString();
     }
 }

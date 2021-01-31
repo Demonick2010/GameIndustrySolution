@@ -1,7 +1,8 @@
 ﻿@page "/"
-
 @*Урок 5*@
 @inject IRepository repository
+
+
 
 <div class="row">
     <div class="col text-center">
@@ -18,10 +19,10 @@
 <!--Урок 2-->
 <!--Урок 4-->
 <GamesListTable games="games" />
-    @*<ChildContent>
+@*<ChildContent>
         <tr><span style="text-align: center; color: red; font-weight: bolder">Elements loading...</span></tr>
     </ChildContent>*@
-    @*<EmptyList>
+@*<EmptyList>
         <tr><span style="text-align: center; color: blue; font-weight: bolder">No items found...</span></tr>
     </EmptyList>*@
 @*</GamesListTable>*@
@@ -103,6 +104,6 @@
     void AddNewGame()
     {
         //gameList.DoSomeThing();
-        games.Add(new Game() {Name = "Game for test", Genre = "Test", ReleaseDate = DateTime.Today});
+        games.Add(new Game() { Name = "Game for test", Genre = "Test", ReleaseDate = DateTime.Today });
     }
 }

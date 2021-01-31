@@ -1,4 +1,6 @@
-﻿<!--Урок 2-->
+﻿@*Урок 7*@
+@using static GameIndustry.Shared.MainLayout
+<!--Урок 2-->
 
 @if (!IsTable && Game != null)
 {
@@ -17,6 +19,14 @@
                 </div>
             }
 
+            @if (Game.Name.Equals("The Witcher 3") && AppStyles.WitcherWords != null)
+            {
+                <div class="row mt-3">
+                    <div class="col alert alert-light text-center">
+                        @AppStyles.WitcherWords[rnd.Next(0, AppStyles.WitcherWords.Count)]
+                    </div>
+                </div>
+            }
         </div>
     </div>
 }
@@ -56,4 +66,8 @@ else
     //    // Delete logic
     //    message = $"Game {Game.Name} deleted!";
     //}
+
+    // Урок 7
+    [CascadingParameter] public AppStyles AppStyles { get; set; }
+    Random rnd = new Random(DateTime.Now.Millisecond);
 }
