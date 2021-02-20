@@ -1,0 +1,135 @@
+﻿@page "/rsp"
+@using System.Timers
+@using GameIndustry.Helpers
+@*Урок 8*@
+@implements IDisposable
+
+<div class="row text-center">
+    <div class="col">
+        <h1 class="text-success">RSP minigame</h1>
+    </div>
+</div>
+
+@*8.2.3*@
+@if (!string.IsNullOrWhiteSpace(gameResultMessage))
+{
+    <div class="row">
+        <div class="col text-center alert alert-@resultStyle">
+            <h3>@gameResultMessage</h3>
+        </div>
+    </div>
+}
+
+<div class="row text-center">
+    <div class="col mb-5 justify-content-center">
+        <img src="@opponent.Image" class="general-image" />
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col mb-5 justify-content-center">
+        <button class="btn btn-primary" @onclick="ResetGame">Start New Game</button>
+    </div>
+</div>
+
+<div class="row text-center justify-content-around">
+    @*<div class="col">
+        <img src="./Images/paper.png" class="user-image hovered-image" />
+    </div>
+    <div class="col">
+        <img src="./Images/rock.png" class="user-image hovered-image" />
+    </div>
+    <div class="col">
+        <img src="./Images/scissors.png" class="user-image hovered-image" />
+    </div>*@
+    @*7.3*@
+    @foreach (var item in games)
+    {
+        @*Step 8*@
+        <img src="@item.Image" class="general-image hovered-image mt-2" @onclick="@(() => SelectingHandler(item))" />
+    }
+</div>
+
+@*После разметки, добавить ссылку в меню на страницу*@
+
+@code {
+    // Step 6 Подключаем using Helpers
+    List<GameHandler> games = new List<GameHandler>()
+    {
+        new GameHandler{ Choose = RSPOptions.Paper, LooseCondition = RSPOptions.Scissors,
+            WinCondition = RSPOptions.Rock, Image = "./Images/paper.png" },
+        new GameHandler{ Choose = RSPOptions.Rock, LooseCondition = RSPOptions.Paper,
+            WinCondition = RSPOptions.Scissors, Image = "./Images/rock.png" },
+        new GameHandler{ Choose = RSPOptions.Scissors, LooseCondition = RSPOptions.Rock,
+            WinCondition = RSPOptions.Paper, Image = "./Images/scissors.png" }
+    };
+
+    Timer timer;
+    // 7
+    GameHandler opponent;
+    Random rnd;
+    // 8.2.2
+    string gameResultMessage = string.Empty;
+    string resultStyle = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // 7.1
+        opponent = games[0];
+        rnd = new Random(DateTime.Now.Millisecond);
+
+        timer = new Timer();
+        timer.Interval = 100;
+        timer.Elapsed += ElapsedTimer;
+        timer.Start();
+    }
+
+    // 7.2
+    int imageIndex = 0;
+    async void ElapsedTimer(object sender, ElapsedEventArgs args)
+    {
+        //Console.WriteLine("executed");
+        //imageIndex = (imageIndex + 1) % games.Count;
+        imageIndex = rnd.Next(0, games.Count);
+        opponent = games[imageIndex];
+        // Добавляем метод изменения состояния картинки
+        await InvokeAsync(StateHasChanged);
+    }
+
+    // Step 8.1
+    void SelectingHandler(GameHandler game)
+    {
+        timer.Stop();
+        GameState gameResult = game.GameResult(opponent);
+
+        switch (gameResult)
+        {
+            case GameState.Victory:
+                gameResultMessage = "Congratulation! You WON!";
+                resultStyle = "success";
+                break;
+            case GameState.Loss:
+                gameResultMessage = "Fail! You LOST!";
+                resultStyle = "danger";
+                break;
+            case GameState.Draw:
+                gameResultMessage = "Draw! Congratulations to both!";
+                resultStyle = "primary";
+                break;
+        }
+    }
+
+    // 9
+    void ResetGame()
+    {
+        timer.Start();
+        gameResultMessage = string.Empty;
+        resultStyle = string.Empty;
+    }
+
+    public void Dispose()
+    {
+        if (timer != null)
+            timer.Dispose();
+    }
+}

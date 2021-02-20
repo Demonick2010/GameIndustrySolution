@@ -181,3 +181,18 @@ app {
         display: block;
     }
 }
+
+.general-image {
+    width: 200px;
+    height: 200px;
+    transition: all .2s ease-in-out;
+    border: 3px groove #d7d7d7;
+    -webkit-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.75);
+}
+
+.hovered-image:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
